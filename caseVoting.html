@@ -3,20 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Semaphore Court</title>
+    <title>Semaphore Court Cases</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <h1>Case Voting</h1>
-    <div id="casesGrid">
-        <!-- Dummy cases, these can be generated with JS -->
-        <div class="case">
-            <img src="path/to/image.jpg" alt="Case Name">
-            <p>Case Name</p>
-        </div>
-        <!-- ... other cases ... -->
+    <nav>
+        <a href="index.html"><img src="static/semaphorecourtlogo.png" alt="Logo" id="logo"></a>
+        <a href="identifierGeneration.html" class="nav-link">Identifier Generation</a>
+    </nav>
+    
+    <div id="search-section">
+        <input type="search" id="caseSearch" placeholder="Search by case name or case Ref #">
+        <button>Search</button>
     </div>
+    
+    <section id="blog-grid">
+    
+        <article class="blog-entry">
+            <img src="assets/dummyimage.jpg" alt="Dummy Image>
+            <h2>Case Name 1</h2>
+            <p>Case Ref #: 001</p>
+            <p>Date: 01/01/2023</p>
+        </article>
+        
+        <article class="blog-entry">
+            <img src="static/dummyimage.jpg" alt="Dummy Image">
+            <h2>Case Name 1</h2>
+            <p>Case Ref #: 001</p>
+            <p>Date: 01/01/2023</p>
+        </article>
 
-    <script src="js/app.js"></script>
+        <article class="blog-entry">
+            <img src="static/dummyimage.jpg" alt="Dummy Image">
+            <h2>Case Name 1</h2>
+            <p>Case Ref #: 001</p>
+            <p>Date: 01/01/2023</p>
+        </article>
+        <!-- ... Repeat for 6 entries ... -->
+    
+    </section>
 </body>
 </html>
