@@ -3,7 +3,9 @@ import { Identity } from "@semaphore-protocol/identity";
 
 let currentJuror: number = 1;
 let totalJurors: number;
-let commitments: bigint[] = [];
+export let commitments: bigint[] = [];
+export let caseName: string;
+export let caseNumber: string;
 
 declare global { 
     interface Window {
@@ -18,6 +20,8 @@ function nextStep(step: number): void {
     const step2: HTMLElement | null = document.getElementById('step2');
     const step3: HTMLElement | null = document.getElementById('step3');
     const step4: HTMLElement | null = document.getElementById('step4');
+    const caseNameElem: HTMLInputElement | null = document.getElementById('caseName') as HTMLInputElement;
+    const caseRefElem: HTMLInputElement | null = document.getElementById('referenceNumber') as HTMLInputElement;
     const juryCountElem: HTMLInputElement | null = document.getElementById('juryCount') as HTMLInputElement;
     const juryCountDisplay: HTMLElement | null = document.getElementById('juryCountDisplay');
 
@@ -29,6 +33,8 @@ function nextStep(step: number): void {
         case 3:
             if (juryCountElem) {
                 totalJurors = parseInt(juryCountElem.value, 10);
+                caseNumber = caseRefElem.value;
+                caseName = caseNameElem.value;
                 if (juryCountDisplay) juryCountDisplay.innerText = juryCountElem.value;
             }
             if (step2) step2.style.display = 'none';

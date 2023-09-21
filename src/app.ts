@@ -1,4 +1,5 @@
 import { Group } from "@semaphore-protocol/group"
+import { commitments } from './jurorIdentifier';
 
 const juryForm = document.getElementById('juryForm');
 const submittedCaseDiv = document.getElementById('submittedCase');
