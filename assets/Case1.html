@@ -8,11 +8,10 @@
 </head>
 <body>
     <nav>
-        <a href="index.html" class="logo">
-            <img src="./images/semaphorecourtlogo.png" alt="Logo" class="logo-image">
-        </a>
-        <a href="../jurorIdentifier.html">Identifier Generation</a>
+        <a href="../index.html"><img src="./images/semaphorecourtlogo.png" alt="Logo" id="logo"></a>
+        <a href="../jurorIdentifier.html" class="nav-button" >Identifier Generation</a>
     </nav>
+
     <main>
         <article>
             <img src="./images/dummyimage.jpg" alt="Dummy Image">
@@ -28,13 +27,15 @@
                 <button class="not-guilty">NOT GUILTY</button>
             </div>
             <!-- You can replicate the above charge div for other charges -->
+            
+            <button id="generateResult">Generate Result</button>
+            <div id="results">
+                <div class="bar guilty-bar"></div>
+                <div class="bar not-guilty-bar"></div>
+            </div>
         </aside>
-        <button id="generateResult">Generate Result</button>
-        <div id="results">
-            <div class="bar guilty-bar"></div>
-            <div class="bar not-guilty-bar"></div>
-        </div>
     </main>
+    
     <script src="voting.ts"></script>
 </body>
 </html>
