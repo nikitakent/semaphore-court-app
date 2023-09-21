@@ -8,7 +8,8 @@ let commitments: bigint[] = [];
 declare global { 
     interface Window {
     nextStep: (step: number) => void;
-    storeSecretMessage: (step: number) => void;
+    clearMessage: (step: number) => void;
+    generateSecretKeys: (step: number) => void;
     }
 }
 
@@ -41,38 +42,72 @@ function nextStep(step: number): void {
 }
 window.nextStep = nextStep;
 
-function storeSecretMessage(): void {
+function generateSecretKeys (): void {
     const secretMessageElem: HTMLInputElement | null = document.getElementById('secretMessage') as HTMLInputElement;
     const message: string = secretMessageElem ? secretMessageElem.value : '';
     const caseNameElem: HTMLInputElement | null = document.getElementById('caseName') as HTMLInputElement;
     const referenceNumberElem: HTMLInputElement | null = document.getElementById('referenceNumber') as HTMLInputElement;
     const caseName: string = caseNameElem ? caseNameElem.value : '';
     const referenceNumber: string = referenceNumberElem ? referenceNumberElem.value : '';
-    
-    if (currentJuror < totalJurors) {
+
+    if (currentJuror <= totalJurors) {
         const identity = new Identity(message)
         commitments.push(identity.getCommitment());
-        const messageDiv = document.getElementById('message');
+        const messageDiv = document.getElementById('secretkeys');
         if (messageDiv) {
-            messageDiv.textContent = `Your Nullifier is #${identity.getNullifier()}`;
-            messageDiv.textContent = `Your Trapdoor is #${identity.getTrapdoor()}`;
-            messageDiv.textContent = `Please keep write these values down and keep them secret. <br> 
-            Anyone who knows your Nullifier, Trapdoor or Secret Message can act on behalf of you. If you feel
-            any of these values are compromised, please contact the Semaphore Court immediately.`;
+            messageDiv.innerHTML = 
+            `Your Nullifier # is #${identity.getNullifier()}<br><br>` +
+            `Your Trapdoor # is #${identity.getTrapdoor()}<br><br>` +
+            `Please store these values and keep them secret. <br><br>` +
+            `Anyone who knows your Nullifier, Trapdoor, or Secret Message can act on behalf of you. <br>` +
+            `If you feel any of these values are compromised, please contact the Semaphore Court immediately.`;
         }
-            currentJuror++;
-        if (secretMessageElem) secretMessageElem.value = ''; // Reset the input for the next juror
-        alert(`Please let juror #${currentJuror} enter their secret message.`);
+        const button = document.getElementById('clearMessageButton');
+            if (currentJuror < totalJurors){
+                if (button) {
+                    button.style.display = 'block';
+                }
+            }
+            if (currentJuror === totalJurors){
+                if (button) {
+                    button.style.display = 'none';
+                }
+                const buttonfinal = document.getElementById('final');
+                if (buttonfinal) {
+                    buttonfinal.style.display = 'block';
+                }
+                const dataToSave = {
+                    caseName,
+                    referenceNumber,
+                    commitments: commitments.map(c => c.toString()) // Convert BigInt values to strings
+                };
+                localStorage.setItem('caseData', JSON.stringify(dataToSave));
+            }
     } else {
-        const dataToSave = {
-            caseName,
-            referenceNumber,
-            commitments: commitments.map(c => c.toString()) // Convert BigInt values to strings
-        };
-        localStorage.setItem('caseData', JSON.stringify(dataToSave));
-        alert(`All commitments stored successfully under case name #${caseName} and reference number #${referenceNumber}!`);
-        location.reload(); // Refresh the page to start over
     }
 }
 
-window.storeSecretMessage = storeSecretMessage;
+window.generateSecretKeys = generateSecretKeys;
+
+function clearMessage(): void {
+    const secretMessageElem: HTMLInputElement | null = document.getElementById('secretMessage') as HTMLInputElement;
+
+    if (currentJuror < totalJurors) {
+        if (secretMessageElem) secretMessageElem.value = ''; // Reset the input for the next juror
+            currentJuror++; 
+            const messageDiv = document.getElementById('secretkeys');
+            if (messageDiv) {
+                messageDiv.innerHTML = "" // Clear secret key message from previous user
+            }
+            alert(`Please let juror #${currentJuror} enter their secret message.`);
+            const button = document.getElementById('clearMessageButton');
+            if (button) {
+                button.style.display = 'none';
+            }
+    } else {
+        alert(`All commitments stored successfully! Please proceed to Group Creation!`);
+        location.reload(); // Refresh the page to start over
+    }; 
+}
+
+window.clearMessage = clearMessage;

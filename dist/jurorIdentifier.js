@@ -6209,41 +6209,74 @@ function nextStep(step) {
     }
 }
 window.nextStep = nextStep;
-function storeSecretMessage() {
+function generateSecretKeys() {
     const secretMessageElem = document.getElementById('secretMessage');
     const message = secretMessageElem ? secretMessageElem.value : '';
     const caseNameElem = document.getElementById('caseName');
     const referenceNumberElem = document.getElementById('referenceNumber');
     const caseName = caseNameElem ? caseNameElem.value : '';
     const referenceNumber = referenceNumberElem ? referenceNumberElem.value : '';
-    if (currentJuror < totalJurors) {
+    if (currentJuror <= totalJurors) {
         const identity = new _semaphore_protocol_identity__WEBPACK_IMPORTED_MODULE_0__.Identity(message);
         commitments.push(identity.getCommitment());
-        const messageDiv = document.getElementById('message');
+        const messageDiv = document.getElementById('secretkeys');
         if (messageDiv) {
-            messageDiv.textContent = `Your Nullifier is #${identity.getNullifier()}`;
-            messageDiv.textContent = `Your Trapdoor is #${identity.getTrapdoor()}`;
-            messageDiv.textContent = `Please keep write these values down and keep them secret. <br> 
-            Anyone who knows your Nullifier, Trapdoor or Secret Message can act on behalf of you. If you feel
-            any of these values are compromised, please contact the Semaphore Court immediately.`;
+            messageDiv.innerHTML =
+                `Your Nullifier # is #${identity.getNullifier()}<br><br>` +
+                    `Your Trapdoor # is #${identity.getTrapdoor()}<br><br>` +
+                    `Please store these values and keep them secret. <br><br>` +
+                    `Anyone who knows your Nullifier, Trapdoor, or Secret Message can act on behalf of you. <br>` +
+                    `If you feel any of these values are compromised, please contact the Semaphore Court immediately.`;
         }
-        currentJuror++;
-        if (secretMessageElem)
-            secretMessageElem.value = ''; // Reset the input for the next juror
-        alert(`Please let juror #${currentJuror} enter their secret message.`);
+        const button = document.getElementById('clearMessageButton');
+        if (currentJuror < totalJurors) {
+            if (button) {
+                button.style.display = 'block';
+            }
+        }
+        if (currentJuror === totalJurors) {
+            if (button) {
+                button.style.display = 'none';
+            }
+            const buttonfinal = document.getElementById('final');
+            if (buttonfinal) {
+                buttonfinal.style.display = 'block';
+            }
+            const dataToSave = {
+                caseName,
+                referenceNumber,
+                commitments: commitments.map(c => c.toString()) // Convert BigInt values to strings
+            };
+            localStorage.setItem('caseData', JSON.stringify(dataToSave));
+        }
     }
     else {
-        const dataToSave = {
-            caseName,
-            referenceNumber,
-            commitments
-        };
-        localStorage.setItem('caseData', JSON.stringify(dataToSave));
-        alert(`All commitments stored successfully under case name #${caseName} and reference number #${referenceNumber}!`);
-        location.reload(); // Refresh the page to start over
     }
 }
-window.storeSecretMessage = storeSecretMessage;
+window.generateSecretKeys = generateSecretKeys;
+function clearMessage() {
+    const secretMessageElem = document.getElementById('secretMessage');
+    if (currentJuror < totalJurors) {
+        if (secretMessageElem)
+            secretMessageElem.value = ''; // Reset the input for the next juror
+        currentJuror++;
+        const messageDiv = document.getElementById('secretkeys');
+        if (messageDiv) {
+            messageDiv.innerHTML = ""; // Clear secret key message from previous user
+        }
+        alert(`Please let juror #${currentJuror} enter their secret message.`);
+        const button = document.getElementById('clearMessageButton');
+        if (button) {
+            button.style.display = 'none';
+        }
+    }
+    else {
+        alert(`All commitments stored successfully! Please proceed to Group Creation!`);
+        location.reload(); // Refresh the page to start over
+    }
+    ;
+}
+window.clearMessage = clearMessage;
 
 })();
 

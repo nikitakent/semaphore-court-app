@@ -6142,7 +6142,6 @@ juryForm.addEventListener('submit', function (e) {
     // ... similarly retrieve other form values
     const group = new _semaphore_protocol_group__WEBPACK_IMPORTED_MODULE_0__.Group(caseID, Number(treeDepth));
     console.log(group.id, group.depth);
-    ;
     console.log(group);
     // For demonstration, just display the data without the image
     submittedCaseDiv.innerHTML = ` 
