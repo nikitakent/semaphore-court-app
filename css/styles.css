@@ -1,0 +1,24 @@
+body {
+    font-family: sans-serif;
+    background-color: white;
+    color: navy;
+}
+
+nav a {
+    margin-right: 15px;
+    color: navy;
+    text-decoration: none;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+#message {
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    margin-top: 10px;
+    font-size: 18px;
+    color: #333;
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semaphore Court</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <script type="module" src="/dist/jurorIdentifier.js"></script>
+    <div id="formContainer">
+        <div id="step1">
+            Please enter the case name and reference number.
+            <input type="text" id="caseName">
+            <input type="text" id="referenceNumber">
+            <button onclick="nextStep(2)">Next</button>
+        </div>
+
+        <div id="step2" style="display: none;">
+            The first question is: How many jurors are on the case jury?
+            <input type="number" id="juryCount">
+            <button onclick="nextStep(3)">Next</button>
+        </div>
+
+        <div id="step3" style="display: none;">
+            We will begin the process for registering <span id="juryCountDisplay"></span>. Please place first juror at the computer.
+            <button onclick="nextStep(4)">Next</button>
+        </div>
+
+        <div id="step4" style="display: none;">
+            Please enter a secret message. This message should be private to you and not easily guessable by someone who knows you.
+            <input type="text" id="secretMessage" maxlength="10">
+            <div id="message"></div>
+            <button onclick="storeSecretMessage()">Next</button>
+        </div>
+    </div>
+
+</body>
+</html>
+    
