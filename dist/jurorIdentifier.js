@@ -6170,16 +6170,26 @@ var __webpack_exports__ = {};
   !*** ./src/jurorIdentifier.ts ***!
   \********************************/
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   caseName: () => (/* binding */ caseName),
+/* harmony export */   caseNumber: () => (/* binding */ caseNumber),
+/* harmony export */   commitments: () => (/* binding */ commitments),
+/* harmony export */   totalJurors: () => (/* binding */ totalJurors)
+/* harmony export */ });
 /* harmony import */ var _semaphore_protocol_identity__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @semaphore-protocol/identity */ "./node_modules/@semaphore-protocol/identity/dist/index.mjs");
 
 let currentJuror = 1;
 let totalJurors;
 let commitments = [];
+let caseName;
+let caseNumber;
 function nextStep(step) {
     const step1 = document.getElementById('step1');
     const step2 = document.getElementById('step2');
     const step3 = document.getElementById('step3');
     const step4 = document.getElementById('step4');
+    const caseNameElem = document.getElementById('caseName');
+    const caseRefElem = document.getElementById('referenceNumber');
     const juryCountElem = document.getElementById('juryCount');
     const juryCountDisplay = document.getElementById('juryCountDisplay');
     switch (step) {
@@ -6192,6 +6202,8 @@ function nextStep(step) {
         case 3:
             if (juryCountElem) {
                 totalJurors = parseInt(juryCountElem.value, 10);
+                caseNumber = caseRefElem.value;
+                caseName = caseNameElem.value;
                 if (juryCountDisplay)
                     juryCountDisplay.innerText = juryCountElem.value;
             }
@@ -6245,6 +6257,7 @@ function generateSecretKeys() {
             const dataToSave = {
                 caseName,
                 referenceNumber,
+                totalJurors,
                 commitments: commitments.map(c => c.toString()) // Convert BigInt values to strings
             };
             localStorage.setItem('caseData', JSON.stringify(dataToSave));
@@ -6272,7 +6285,7 @@ function clearMessage() {
     }
     else {
         alert(`All commitments stored successfully! Please proceed to Group Creation!`);
-        location.reload(); // Refresh the page to start over
+        location.href = 'jurorGroupGeneration.html';
     }
     ;
 }

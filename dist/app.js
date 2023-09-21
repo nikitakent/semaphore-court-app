@@ -6131,22 +6131,27 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _semaphore_protocol_group__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @semaphore-protocol/group */ "./node_modules/@semaphore-protocol/group/dist/index.mjs");
 
+const storedData = JSON.parse(localStorage.getItem('caseData'));
+// Retrieve the values from the parsed object
+const caseName = storedData.caseName;
+const caseNumber = storedData.referenceNumber;
+const totalJurors = storedData.totalJurors;
+const commitments = storedData.commitments.map((c) => BigInt(c));
+console.log(caseName, caseNumber, commitments);
 const juryForm = document.getElementById('juryForm');
 const submittedCaseDiv = document.getElementById('submittedCase');
 const nextBtn = document.getElementById('nextBtn');
 juryForm.addEventListener('submit', function (e) {
     e.preventDefault();
-    const caseName = document.getElementById('caseName').value;
-    const caseID = document.getElementById('caseID').value;
     const treeDepth = document.getElementById('treeDepth').value;
     // ... similarly retrieve other form values
-    const group = new _semaphore_protocol_group__WEBPACK_IMPORTED_MODULE_0__.Group(caseID, Number(treeDepth));
+    const group = new _semaphore_protocol_group__WEBPACK_IMPORTED_MODULE_0__.Group(caseNumber, Number(treeDepth), commitments);
     console.log(group.id, group.depth);
     console.log(group);
     // For demonstration, just display the data without the image
     submittedCaseDiv.innerHTML = ` 
         Case Name: ${caseName}<br>
-        Case ID: ${caseID}<br>
+        Case ID: ${caseNumber}<br>
         Tree Depth: ${treeDepth}</br>
     `;
     nextBtn.style.display = 'block'; // Show the Next button
@@ -6154,6 +6159,28 @@ juryForm.addEventListener('submit', function (e) {
 nextBtn.addEventListener('click', function () {
     location.href = 'jurorIdentifier.html';
 });
+function calculateRecommendedDepth(totalJurors) {
+    for (let i = 16; i <= 32; i++) {
+        if (Math.pow(2, i) > totalJurors + 100) {
+            return i;
+        }
+    }
+    return null;
+}
+window.onload = function () {
+    const recommendedDepth = calculateRecommendedDepth(totalJurors);
+    const titleElem = document.getElementById('juryGroupTitle');
+    if (titleElem) {
+        titleElem.textContent = `Group Generation for ${caseName} (${caseNumber})`;
+    }
+    const descriptionElem = document.getElementById('juryGroupDescription');
+    if (descriptionElem && recommendedDepth !== null) {
+        descriptionElem.innerHTML = `Since the group has ${totalJurors} jurors, we recommend setting the tree depth to ${recommendedDepth}. The minimum depth permitted is 16, and the maximum is 32.`;
+    }
+    else if (descriptionElem) {
+        descriptionElem.innerHTML = `The number of jurors is too large to find a suitable tree depth between 16 and 32.`;
+    }
+};
 
 })();
 

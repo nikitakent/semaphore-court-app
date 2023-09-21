@@ -2,7 +2,7 @@
 import { Identity } from "@semaphore-protocol/identity";
 
 let currentJuror: number = 1;
-let totalJurors: number;
+export let totalJurors: number;
 export let commitments: bigint[] = [];
 export let caseName: string;
 export let caseNumber: string;
@@ -85,8 +85,9 @@ function generateSecretKeys (): void {
                 const dataToSave = {
                     caseName,
                     referenceNumber,
+                    totalJurors,
                     commitments: commitments.map(c => c.toString()) // Convert BigInt values to strings
-                };
+                };  
                 localStorage.setItem('caseData', JSON.stringify(dataToSave));
             }
     } else {
@@ -112,7 +113,7 @@ function clearMessage(): void {
             }
     } else {
         alert(`All commitments stored successfully! Please proceed to Group Creation!`);
-        location.reload(); // Refresh the page to start over
+        location.href = 'jurorGroupGeneration.html';
     }; 
 }
 

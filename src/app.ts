@@ -1,5 +1,15 @@
 import { Group } from "@semaphore-protocol/group"
-import { commitments } from './jurorIdentifier';
+
+
+const storedData = JSON.parse(localStorage.getItem('caseData') as string);
+
+// Retrieve the values from the parsed object
+const caseName = storedData.caseName;
+const caseNumber = storedData.referenceNumber;
+const totalJurors = storedData.totalJurors;
+const commitments = storedData.commitments.map((c: string) => BigInt(c));
+
+console.log(caseName, totalJurors, caseNumber, commitments);
 
 const juryForm = document.getElementById('juryForm');
 const submittedCaseDiv = document.getElementById('submittedCase');
@@ -8,19 +18,17 @@ const nextBtn = document.getElementById('nextBtn');
 juryForm.addEventListener('submit', function(e) {
     e.preventDefault();
 
-    const caseName = (document.getElementById('caseName') as any).value
-    const caseID = (document.getElementById('caseID') as any).value
     const treeDepth = (document.getElementById('treeDepth') as any).value
     // ... similarly retrieve other form values
 
-    const group = new Group(caseID, Number(treeDepth));
+    const group = new Group(caseNumber, Number(treeDepth),commitments);
     console.log(group.id, group.depth);
     console.log(group)
 
     // For demonstration, just display the data without the image
     submittedCaseDiv.innerHTML = ` 
         Case Name: ${caseName}<br>
-        Case ID: ${caseID}<br>
+        Case ID: ${caseNumber}<br>
         Tree Depth: ${treeDepth}</br>
     `;
 
@@ -30,3 +38,30 @@ juryForm.addEventListener('submit', function(e) {
 nextBtn.addEventListener('click', function() {
     location.href = 'jurorIdentifier.html';
 });
+
+
+function calculateRecommendedDepth(totalJurors: number): number | null {
+    for (let i = 16; i <= 32; i++) {
+        if (2 ** i > totalJurors + 100) {
+            return i;
+        }
+    }
+    return null;
+}
+
+
+window.onload = function() {
+    const recommendedDepth = calculateRecommendedDepth(totalJurors);
+
+    const titleElem = document.getElementById('juryGroupTitle');
+    if (titleElem) {
+        titleElem.textContent = `Group Generation for ${caseName} (${caseNumber})`;
+    }
+
+    const descriptionElem = document.getElementById('juryGroupDescription');
+    if (descriptionElem && recommendedDepth !== null) {
+        descriptionElem.innerHTML = `Since the group has ${totalJurors} jurors, we recommend setting the tree depth to ${recommendedDepth}. The minimum depth permitted is 16, and the maximum is 32.`;
+    } else if (descriptionElem) {
+        descriptionElem.innerHTML = `The number of jurors is too large to find a suitable tree depth between 16 and 32.`;
+    }
+}
