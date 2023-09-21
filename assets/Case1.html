@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Case</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">
+            <img src="assets/images/semaphorecourtlogo.jpg" alt="Logo" class="logo-image">
+        </a>
+        <a href="../jurorIdentifier.html">Identifier Generation</a>
+    </nav>
+    <main>
+        <article>
+            <img src="assets/images/dummyimage.jpg" alt="Dummy Image">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+        </article>
+        <aside>
+            <h2>Charges</h2>
+            <div class="charge" data-id="1">
+                <h3>Charge 1</h3>
+                <p>Short description...</p>
+                <textarea class="message-field"></textarea>
+                <button class="guilty">GUILTY</button>
+                <button class="not-guilty">NOT GUILTY</button>
+            </div>
+            <!-- You can replicate the above charge div for other charges -->
+        </aside>
+        <button id="generateResult">Generate Result</button>
+        <div id="results">
+            <div class="bar guilty-bar"></div>
+            <div class="bar not-guilty-bar"></div>
+        </div>
+    </main>
+    <script src="voting.ts"></script>
+</body>
+</html>

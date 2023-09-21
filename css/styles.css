@@ -13,6 +13,18 @@ nav {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+
+aside {
+    float: right;
+    width: 30%;
+    margin-left: 2%;
+}
+
+article {
+    float: left;
+    width: 65%;
+}
+
 #logo {
     width: 100px;
     height: 100px;
@@ -92,4 +104,35 @@ button:hover {
     max-height: 300px; /* Maximum height of the image. */
     display: block;   /* This removes any unwanted whitespace below the image. */
     margin: 0 auto;   /* This centers the image within its container if it's smaller than the container's width. */
+}
+
+.charge {
+    margin-bottom: 20px;
+}
+
+.guilty {
+    background-color: red;
+    color: white;
+}
+
+.not-guilty {
+    background-color: green;
+    color: white;
+}
+
+.bar {
+    height: 30px;
+    margin: 10px;
+}
+
+.guilty-bar {
+    background-color: red;
+}
+
+.not-guilty-bar {
+    background-color: green;
+}
+
+#results {
+    clear: both;
 }

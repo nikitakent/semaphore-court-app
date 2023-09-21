@@ -3,7 +3,8 @@ const path = require('path');
 module.exports = {
     entry: {
       app: './src/app.ts',
-      jurorIdentifier: './src/jurorIdentifier.ts'
+      jurorIdentifier: './src/jurorIdentifier.ts',
+      voting: './src/voting.ts',
      }, // Your source entry point
   mode: 'development',
   devtool: 'source-map',
