@@ -6137,7 +6137,7 @@ const caseName = storedData.caseName;
 const caseNumber = storedData.referenceNumber;
 const totalJurors = storedData.totalJurors;
 const commitments = storedData.commitments.map((c) => BigInt(c));
-console.log(caseName, caseNumber, commitments);
+console.log(caseName, totalJurors, caseNumber, commitments);
 const juryForm = document.getElementById('juryForm');
 const submittedCaseDiv = document.getElementById('submittedCase');
 const nextBtn = document.getElementById('nextBtn');
