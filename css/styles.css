@@ -80,11 +80,6 @@ button:hover {
     transform: scale(1.02);
 }
 
-.blog-entry img {
-    width: 100%;
-    height: auto;
-}
-
 .blog-entry h2 {
     padding: 10px;
     background-color: navy;
@@ -97,7 +92,7 @@ button:hover {
     margin: 0;
 }
 
-.blog-entry img {
+.blog-entry img, article img {
     width: 100%;    /* This ensures the image takes up the full width of its container. */
     height: auto;   /* This preserves the image's aspect ratio. */
     max-width: 400px; /* Maximum width of the image. */
