@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "./node_modules/.bin/webpack --config webpack.config.js ",
+    "dev": "./node_modules/.bin/webpack serve --config webpack.config.js",
     "server": "node server.js"
   },
   "keywords": [],
@@ -20,7 +21,8 @@
     "fs": "^0.0.1-security",
     "os-browserify": "^0.3.0",
     "path-browserify": "^1.0.1",
-    "stream-browserify": "^3.0.0"
+    "stream-browserify": "^3.0.0",
+    "zustand": "^4.4.1"
   },
   "devDependencies": {
     "ts-loader": "^9.4.4",

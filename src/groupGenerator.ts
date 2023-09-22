@@ -1,4 +1,6 @@
+// @ts-nocheck
 import { Group } from "@semaphore-protocol/group"
+import { createStore } from "zustand/vanilla"
 
 const storedData = JSON.parse(localStorage.getItem('caseData') as string);
 
@@ -6,10 +8,10 @@ const storedData = JSON.parse(localStorage.getItem('caseData') as string);
 const caseName = storedData.caseName;
 const caseNumber = storedData.referenceNumber;
 const totalJurors = storedData.totalJurors;
-const commitments = storedData.commitments.map((c: string) => BigInt(c));
+const commitments = storedData.commitments
+// .map((c: string) => BigInt(c));
 
 console.log(caseName, totalJurors, caseNumber, commitments);
-
 const juryForm = document.getElementById('juryForm');
 const submittedCaseDiv = document.getElementById('submittedCase');
 const nextBtn = document.getElementById('nextBtn');
@@ -19,14 +21,17 @@ juryForm.addEventListener('submit', function(e) {
 
     const treeDepth = (document.getElementById('treeDepth') as any).value
     // ... similarly retrieve other form values
-
-    const group = new Group(caseNumber, Number(treeDepth),commitments);
+    console.log(caseNumber, Number(treeDepth), commitments);
+    const group = new Group(caseNumber, Number(treeDepth), commitments);
     //test
     console.log(group.id, group.depth);
     console.log(group)
     // save into local storage so can be retrieved in the votingApp.html
-    const groupJson = JSON.stringify(group);
-    localStorage.setItem('group', groupJson);
+    // const group = createStore(() => (
+    //     { ... }
+    //     ))
+    // const { getState, setState, subscribe } = group
+    // export default store
     // is there a better way to store the group variable without it being turned into a json?
 
     // For demonstration, just display the data without the image
