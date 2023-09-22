@@ -36,7 +36,7 @@ juryForm.addEventListener('submit', function(e) {
 });
 
 nextBtn.addEventListener('click', function() {
-    location.href = 'jurorIdentifier.html';
+    location.href = 'votingApp.html';
 });
 
 

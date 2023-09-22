@@ -1233,8 +1233,8 @@ function getGlobal() {
     if (typeof window !== 'undefined') {
         return window;
     }
-    if (typeof __webpack_require__.g !== 'undefined') {
-        return __webpack_require__.g;
+    if (typeof global !== 'undefined') {
+        return global;
     }
     throw new Error('unable to locate global object');
 }
@@ -1326,7 +1326,7 @@ function randomBytes(length) {
     if (typeof window !== 'undefined' && typeof window.Buffer !== 'undefined') {
       Buffer = window.Buffer;
     } else {
-      Buffer = (__webpack_require__(/*! buffer */ "?8131").Buffer);
+      Buffer = (__webpack_require__(/*! buffer */ "buffer").Buffer);
     }
   } catch (e) {
   }
@@ -4850,7 +4850,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*
   var WEB_WORKER = !WINDOW && typeof self === 'object';
   var NODE_JS = !root.JS_SHA512_NO_NODE_JS && typeof process === 'object' && process.versions && process.versions.node;
   if (NODE_JS) {
-    root = __webpack_require__.g;
+    root = global;
   } else if (WEB_WORKER) {
     root = self;
   }
@@ -5760,13 +5760,14 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*
 
 /***/ }),
 
-/***/ "?8131":
-/*!************************!*\
-  !*** buffer (ignored) ***!
-  \************************/
-/***/ (() => {
+/***/ "buffer":
+/*!*************************!*\
+  !*** external "buffer" ***!
+  \*************************/
+/***/ ((module) => {
 
-/* (ignored) */
+"use strict";
+module.exports = require("buffer");
 
 /***/ }),
 
@@ -6122,18 +6123,6 @@ var Identity = /** @class */ (function () {
 /******/ 				}
 /******/ 			}
 /******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/global */
-/******/ 	(() => {
-/******/ 		__webpack_require__.g = (function() {
-/******/ 			if (typeof globalThis === 'object') return globalThis;
-/******/ 			try {
-/******/ 				return this || new Function('return this')();
-/******/ 			} catch (e) {
-/******/ 				if (typeof window === 'object') return window;
-/******/ 			}
-/******/ 		})();
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */

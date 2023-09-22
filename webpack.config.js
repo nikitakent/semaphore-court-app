@@ -1,6 +1,7 @@
 const path = require('path');
 
 module.exports = {
+    target: 'node',
     entry: {
       app: './src/app.ts',
       jurorIdentifier: './src/jurorIdentifier.ts',
@@ -17,10 +18,17 @@ module.exports = {
       }
     ]
   },
+  stats: {
+    errorDetails: true
+  },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
     fallback: {
-        "crypto": require.resolve("crypto-browserify")
+        "crypto": require.resolve("crypto-browserify"),
+        "os": require.resolve("os-browserify/browser"),
+        "stream": require.resolve("stream-browserify"),
+        "fs": false,
+        "path": require.resolve("path-browserify")
     }
   },
   output: {

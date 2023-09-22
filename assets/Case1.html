@@ -13,15 +13,32 @@
     </nav>
 
     <main>
-        <article>
-            <img src="./images/dummyimage.jpg" alt="Dummy Image">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+        <article class="case-details">
+            <img src="./images/dummyimage.jpg" alt="Dummy Image" class="case-image">
+            <p class="case-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
         </article>
-        <aside>
+        <aside class="charges-section">
             <h2>Charges</h2>
-            <div class="charge" data-id="1">
-                <h3>Charge 1</h3>
-                <p>Short description...</p>
+            <input type="hidden" id="hiddenInput" value="Case1">
+            <div class="charge" id="1">
+                <form class="charge-form" data-id="1">
+                    <h3>Charge 1</h3>
+                    <p>Short description...</p>
+                    <textarea class="message-field1" name="message" placeholder="Enter your secret message"></textarea>
+                    <button type="button" class="guilty" name="verdict" value="guilty">GUILTY</button>
+                    <button type="button" class="not-guilty" name="verdict" value="not-guilty">NOT GUILTY</button>
+                    <button type="submit" style="display:none;" value="Submit Verdict" onclick="validateProof()">Submit and validate vote</button>
+                    <message style="display:none;">Voting Successful</message>
+                    <button style="display:none;" id="generateResult">Generate Result</button>
+                    <div id="results" style="display:none;">
+                        <div class="bar guilty-bar"></div>
+                        <div class="bar not-guilty-bar"></div>
+                    </div>
+                </form>
+            </div>
+            <div class="charge" id="2">
+                <h3>Charge 2</h3>
+                <p>This is a short description of the charge</p>
                 <textarea class="message-field"></textarea>
                 <button class="guilty">GUILTY</button>
                 <button class="not-guilty">NOT GUILTY</button>
@@ -36,6 +53,7 @@
         </aside>
     </main>
     
-    <script src="voting.ts"></script>
+    
+    <script src="../dist/voting.js"></script>
 </body>
 </html>

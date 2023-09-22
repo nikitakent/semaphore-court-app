@@ -100,7 +100,10 @@ button {
 button:hover {
     background-color: #333;
 }
-
+.next-btn, .generate-btn, .final-btn {
+    display: block;
+    margin-top: 20px;
+}
 #blog-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -169,4 +172,140 @@ button:hover {
 
 #results {
     clear: both;
+}
+
+/* Previous styles here... */
+
+/* Layout for main content */
+main {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0;
+}
+
+.case-details {
+    flex: 1;
+    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Aligns content to the center horizontally */
+}
+
+.case-image {
+    max-width: 100%; /* Ensures image doesn't overflow its container */
+    height: auto;
+    margin-bottom: 20px; /* Space between image and description */
+}
+
+.case-description {
+    text-align: center;
+}
+
+.charges-section {
+    flex: 1; /* This allows the charges section to take equal space as the case details */
+    padding-left: 20px;
+    border-left: 1px solid #ddd; /* A light border to visually separate the sections */
+}
+
+/* Previous styles here... */
+
+footer {
+    background-color: #f5f5f5;
+    padding: 20px 0;
+    border-top: 1px solid #e0e0e0;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Allows the content to wrap on smaller screens */
+    padding: 0 20px; /* Horizontal padding to maintain consistency with the rest of your design */
+}
+
+.form-wrapper {
+    background: white;
+    padding: 30px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    width: 100%;
+    border-radius: 8px;
+}
+
+.form-step p {
+    margin: 10px 0;
+}
+
+.contact-details {
+    font-size: 1em;
+    color: navy;
+}
+
+.footer-links {
+    display: flex;
+    align-items: center;
+}
+
+.footer-links a {
+    margin: 0 10px;
+    color: navy;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+.footer-links span {
+    color: navy;
+    padding: 0 5px;
+}
+
+
+.case-details {
+    position: relative; /* This sets the reference for the absolutely positioned child elements */
+}
+
+.case-image {
+    width: 100%;
+    display: block;
+}
+
+.case-description {
+    position: absolute; /* This takes the div out of the document's flow */
+    top: 20%; /* Positions the top edge of the div at the center of the case-details */
+    left: 50%; /* Positions the left edge of the div at the center of the case-details */
+    transform: translate(-50%, -50%); /* Moves the div back 50% of its width and height */
+    text-align: center;
+    color: white; /* Assuming a dark image, so making text color white for contrast */
+}
+
+/* Optional: Adding a background color to the text for better readability */
+.case-description h1, 
+.case-description p {
+    background-color: rgba(0, 0, 0, 0.6); /* Black with 60% opacity */
+    padding: 5px 10px; /* Some space around the text */
+    display: inline-block;
+}
+
+.case-description h1 {
+    font-size: 3em; /* Adjust this value as per your needs */
+    margin-bottom: 10px; /* Adds some space between the h1 and p elements */
+}
+
+.case-description p {
+    font-size: 1.5em; /* Adjust this value as per your needs */
+}
+
+.charges-section {
+    flex: 1; 
+    padding-left: 20px;
+    border-left: 1px solid #ddd; 
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    max-width: 400px; /* Limiting width to 400px. Adjust as necessary */
+    overflow: hidden; /* Ensures content doesn't overflow */
 }
