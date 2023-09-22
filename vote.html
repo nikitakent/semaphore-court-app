@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Case</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <script src="./dist/vote.js"></script>
+    <nav>
+        <a href="../index.html"><img src="./images/semaphorecourtlogo.png" alt="Logo" id="logo"></a>
+    </nav>
+
+    <h1 id="caseTitle">Case Name Placeholder</h1>
+
+    <form class="charge-form" data-id="1">
+        <h3>Charge 1</h3>
+        <p>Short description...</p>
+        <textarea class="message-field1" name="message" placeholder="Enter your secret message"></textarea>
+        <button type="button" class="guilty" name="verdict" value="guilty">GUILTY</button>
+        <button type="button" class="not-guilty" name="verdict" value="not-guilty">NOT GUILTY</button>
+        <button type="submit" style="display:none;" value="Submit Verdict" onclick="validateProof()">Submit and validate vote</button>
+        <message style="display:none;">Voting Successful</message>
+        <button style="display:none;" id="generateResult">Generate Result</button>
+        <div id="results" style="display:none;">
+            <div class="bar guilty-bar"></div>
+            <div class="bar not-guilty-bar"></div>
+        </div>
+    </form>
+
+</body>
+</html>>
