@@ -73,7 +73,6 @@ charges.forEach((charge) => {
     }
 });
 
-
 async function genProof(identity:any, signal: number, chargeId: string) {
     if (caseData) {
         const group = new Group(caseData.id, caseData.treedepth, caseData.members as any);

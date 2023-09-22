@@ -1,6 +1,5 @@
 import { Group } from "@semaphore-protocol/group"
 
-
 const storedData = JSON.parse(localStorage.getItem('caseData') as string);
 
 // Retrieve the values from the parsed object
@@ -22,8 +21,13 @@ juryForm.addEventListener('submit', function(e) {
     // ... similarly retrieve other form values
 
     const group = new Group(caseNumber, Number(treeDepth),commitments);
+    //test
     console.log(group.id, group.depth);
     console.log(group)
+    // save into local storage so can be retrieved in the votingApp.html
+    const groupJson = JSON.stringify(group);
+    localStorage.setItem('group', groupJson);
+    // is there a better way to store the group variable without it being turned into a json?
 
     // For demonstration, just display the data without the image
     submittedCaseDiv.innerHTML = ` 
@@ -31,14 +35,12 @@ juryForm.addEventListener('submit', function(e) {
         Case ID: ${caseNumber}<br>
         Tree Depth: ${treeDepth}</br>
     `;
-
     nextBtn.style.display = 'block';  // Show the Next button
 });
 
 nextBtn.addEventListener('click', function() {
-    location.href = 'votingApp.html';
+    location.href = './votingApp.html';
 });
-
 
 function calculateRecommendedDepth(totalJurors: number): number | null {
     for (let i = 16; i <= 32; i++) {
@@ -48,7 +50,6 @@ function calculateRecommendedDepth(totalJurors: number): number | null {
     }
     return null;
 }
-
 
 window.onload = function() {
     const recommendedDepth = calculateRecommendedDepth(totalJurors);

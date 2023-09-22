@@ -6135,8 +6135,13 @@ juryForm.addEventListener('submit', function (e) {
     const treeDepth = document.getElementById('treeDepth').value;
     // ... similarly retrieve other form values
     const group = new _semaphore_protocol_group__WEBPACK_IMPORTED_MODULE_0__.Group(caseNumber, Number(treeDepth), commitments);
+    //test
     console.log(group.id, group.depth);
     console.log(group);
+    // save into local storage so can be retrieved in the votingApp.html
+    const groupJson = JSON.stringify(group);
+    localStorage.setItem('group', groupJson);
+    // is there a better way to store the group variable without it being turned into a json?
     // For demonstration, just display the data without the image
     submittedCaseDiv.innerHTML = ` 
         Case Name: ${caseName}<br>
@@ -6146,7 +6151,7 @@ juryForm.addEventListener('submit', function (e) {
     nextBtn.style.display = 'block'; // Show the Next button
 });
 nextBtn.addEventListener('click', function () {
-    location.href = 'jurorIdentifier.html';
+    location.href = './votingApp.html';
 });
 function calculateRecommendedDepth(totalJurors) {
     for (let i = 16; i <= 32; i++) {
