@@ -113,7 +113,7 @@ function clearMessage(): void {
             }
     } else {
         alert(`All commitments stored successfully! Please proceed to Group Creation!`);
-        location.href = 'jurorGroupGeneration.html';
+        location.href = 'groupGenerator.html';
     }; 
 }
 

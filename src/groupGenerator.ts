@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { Group } from "@semaphore-protocol/group"
-import { createStore } from "zustand/vanilla"
+import { store } from "./stateMaintenance.ts"
 
 const storedData = JSON.parse(localStorage.getItem('caseData') as string);
 
@@ -26,13 +26,7 @@ juryForm.addEventListener('submit', function(e) {
     //test
     console.log(group.id, group.depth);
     console.log(group)
-    // save into local storage so can be retrieved in the votingApp.html
-    // const group = createStore(() => (
-    //     { ... }
-    //     ))
-    // const { getState, setState, subscribe } = group
-    // export default store
-    // is there a better way to store the group variable without it being turned into a json?
+    store.setState({ group })
 
     // For demonstration, just display the data without the image
     submittedCaseDiv.innerHTML = ` 
