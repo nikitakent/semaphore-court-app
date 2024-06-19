@@ -1,10 +1,12 @@
-# Semaphore Jury Voting Application
+# Purpose
 
 This application was designed for Privacy Scaling Solutions open source development (2023 Asia ZK Cohort).
 
 The issue was to show a way of using the Semaphore library without using dependencies or blockchain - this would enable developers and students to learn the basics of ZK identification management without the added complexities of full-stack development and blockchain protocols. This project has been built with pure Typescript, Javascript, HTML and CSS. We use the Zustand library for state management of the Merkle Trees, though we are currently working to remove this dependency.
 
 As of writing, there is no merkle tree compatible local state management tool for plain Javascript/Typescript web applications.
+
+# Jury Member identities and Jury Groups
 
 Semaphore is an open-source identity management library mantained by Privacy Scaling Solutions. We use Semaphore identities (an Edwards-curve Digital Signature Algorithm key-pair) to create the private and public identities of "jury members". Public identities are also referred to as public "commitments" in the Semaphore protocol.
 
@@ -20,7 +22,7 @@ const group = new Group(members)
 
 **Voting in the Semaphore Jury Voting application**
 
-This toy example allows certain jury groups to be assigned to legal cases. Jury members vote for or against case
+This toy example allows certain jury groups to be assigned to legal cases. Jury members vote for or against each charge for a case.
 
 While this Jury Voting example is completely hypothetical, one could imagine a potential use-case where jury members do not have to publicly display their votes, and this may be useful in high-security-threat or high-profile cases.
 
