@@ -1,6 +1,6 @@
 # Purpose
 
-This application was designed for Privacy Scaling Explorations (core program)[https://pse.dev/en/programs] (2023 Asia ZK Cohort).
+This application was designed for Privacy Scaling Explorations [core program](https://pse.dev/en/programs) (2023 Asia ZK Cohort).
 
 The issue was to show a way of using the Semaphore library without using dependencies or blockchain - this would enable developers and students to learn the basics of ZK identification management without the added complexities of full-stack development and blockchain protocols. This project has been built with pure Typescript, Javascript, HTML and CSS. We use the Zustand library for state management of the Merkle Trees, though we are currently working to remove this dependency.
 
